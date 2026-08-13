@@ -22,11 +22,11 @@ Lightweight **client-side** performance helpers aimed at weak / older GPUs.
 
 ## Requirements
 
-- Java 25 (as targeted by the original Loom setup)  
-- Fabric Loader for Minecraft **26.2**  
-- Fabric API matching 26.2  
+- Java 25  
+- Minecraft Fabric 26.x
+- Fabric API  
 - Cloth Config  
-- Mod Menu (optional)
+- Mod Menu 
 
 ## Build
 
