@@ -1,4 +1,4 @@
-# HSN-Optimizations
+
 # HSN-Optimizations
 
 A Fabric mod focused on making Minecraft run better on older hardware (pre-2015 / Intel HD GPUs, etc.) in 2026.
