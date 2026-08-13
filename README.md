@@ -5,7 +5,7 @@
 **License:** MIT  
 
 Lightweight **client-side** performance helpers aimed at weak / older GPUs.
-##Main Features:
+
 
 - Particle distance + soft count culling  
 - Entity / item / XP / decoration render distance limits  
