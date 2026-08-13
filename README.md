@@ -1,6 +1,6 @@
-# HSN-Optimizations (cleaned)
+# HSN-Optimizations 
 
-**Version:** 3.8.0-clean  
+**Version:** 3.8.3 
 **Minecraft:** 26.2 (Fabric)  
 **License:** MIT  
 
@@ -31,12 +31,6 @@ This is a cleaned source tree. The original package contained a large amount of 
 - Cloth Config  
 - Mod Menu (optional)
 
-## Recommended stack
-
-1. A modern terrain renderer (Sodium or equivalent for 26.2)  
-2. This mod for particle / entity / sound limits  
-3. Lithium / FerriteCore if available for the same version  
-
 ## Build
 
 ```bash
@@ -45,18 +39,5 @@ This is a cleaned source tree. The original package contained a large amount of 
 
 Output: `build/libs/hsn-optimizations-3.8.0-clean.jar` (after version is aligned in `gradle.properties`).
 
-## Notes on multi-loader / Architectury
 
-The original project is pure Fabric with client mixins. Converting it to a full Architectury multi-loader project (Fabric + Forge/NeoForge + Quilt) is a larger structural change (common/fabric/forge modules, `@ExpectPlatform`, shared mixins strategy, etc.). This cleaned zip keeps the Fabric layout so it remains buildable. A proper Architectury port can be done on top of this cleaned base.
 
-## What was removed
-
-- Entire `exp/` package (HardcoreExp, OffHeapParticleSoA, FrustumPovCull, VectorCull, LazyBudget)  
-- Fabricated rendering “engine” stubs (LOD / batch / occlusion / shader / VBO claims)  
-- Adaptive FPS ladder, tick budget, frame cache, hysteresis, render-snap systems  
-- JVM GC forcing / idle memory trim / OpenGL preference helpers  
-- Input latency / mouse hacks  
-- Dozens of over-eager or mapping-fragile mixins  
-- AI-generated documentation claiming features that did not exist  
-
-The remaining code is intentionally conservative and easier to maintain or port.
