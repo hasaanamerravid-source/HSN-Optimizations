@@ -1,4 +1,4 @@
-
+##HSN-Optimizations:
 A Fabric mod focused on making Minecraft run better on older hardware (pre-2015 / Intel HD GPUs, etc.) in 2026.
 
 It reduces particles, hides distant entities, lowers shadows, name tags and distant sounds, and gives you performance presets without heavily changing how the game looks.
