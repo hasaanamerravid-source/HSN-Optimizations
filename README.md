@@ -6,8 +6,6 @@
 
 Lightweight **client-side** performance helpers aimed at weak / older GPUs.
 
-This is a cleaned source tree. The original package contained a large amount of experimental, non-functional, and over-engineered code (off-heap particle systems, fabricated “rendering engine” improvements, aggressive adaptive systems, JVM GC forcing from inside the game, etc.). Those have been removed.
-
 ## What remains (real, focused features)
 
 - Particle distance + soft count culling  
