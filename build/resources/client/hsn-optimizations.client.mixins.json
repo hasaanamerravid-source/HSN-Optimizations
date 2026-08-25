@@ -1,0 +1,26 @@
+{
+	"required": true,
+	"package": "hsn.modod.client.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"ParticleManagerMixin",
+		"EntityRendererMixin",
+		"EntityShadowMixin",
+		"SoundEngineMixin",
+		"ToastMixin",
+		"BlockEntityViewDistanceMixin",
+		"NameTagMixin",
+		"DebugScreenMixin",
+		"ItemSpinMixin",
+		"TextureAnimationMixin",
+		"BeaconRendererMixin",
+		"CloudRendererMixin",
+		"EntityAnimMixin",
+		"FogRendererMixin",
+		"GlowOutlineMixin",
+		"SodiumOptionsButtonMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

@@ -1,0 +1,4 @@
+{
+	"modmenu.nameTranslation.hsn-optimizations": "HSN Optimizations",
+	"modmenu.descriptionTranslation.hsn-optimizations": "Lightweight client-side particle, entity, shadow, cloud, beacon-beam, glow-outline and sound culling for weak hardware."
+}
