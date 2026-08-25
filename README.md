@@ -1,6 +1,6 @@
 # HSN-Optimizations 
 
-**Version:** 3.8.3 
+**Version:** 3.8.4 
 **Minecraft:** 26.2 (Fabric)  
 **License:** MIT  
 
