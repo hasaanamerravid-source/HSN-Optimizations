@@ -1,1 +1,0 @@
--Xms3G -Xmx6G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=150 -XX:+UnlockExperimentalVMOptions -XX:G1HeapRegionSize=16M -Dfile.encoding=UTF-8
