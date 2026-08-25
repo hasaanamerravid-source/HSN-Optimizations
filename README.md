@@ -4,7 +4,7 @@
 **Minecraft:** 26.2 (Fabric)  
 **License:** MIT
 
-Lightweight **client-side** performance helpers aimed at weak / older GPUs.  
+Lightweight **client-side** performance helper. 
 Designed to **complement** Sodium (and similar) rather than fight them.
 
 ## What it does
