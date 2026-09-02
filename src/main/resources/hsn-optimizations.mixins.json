@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "hsn.modod.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "ChunkGeneratorLocateMixin",
+    "ExperienceOrbThrottleMixin",
+    "FastWorldLoadMixin",
+    "ItemEntityThrottleMixin",
+    "PathNavigationMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

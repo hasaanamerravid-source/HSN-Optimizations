@@ -1,0 +1,8 @@
+{
+	"modmenu.nameTranslation.hsn-optimizations": "HSN Optimizations",
+	"modmenu.descriptionTranslation.hsn-optimizations": "Client-side distance culling and adaptive FPS helpers. Complements Sodium.",
+	"key.hsn-optimizations.performance": "Toggle Performance Mode",
+	"key.hsn-optimizations.overlay": "Toggle FPS overlay",
+	"key.hsn-optimizations.ultra": "Apply ULTRA_LOW preset",
+	"key.hsn-optimizations.safe": "Apply SAFE preset"
+}
