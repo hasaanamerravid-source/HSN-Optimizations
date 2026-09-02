@@ -1,6 +1,6 @@
 # HSN-Optimizations
 
-**Version:** 3.8.5 (release wrap-up)  
+**Version:** 3.8.5 (release )
 **Minecraft:** 26.2 (Fabric)  
 **License:** MIT
 
@@ -29,7 +29,7 @@ Meant to sit next to Sodium, not replace it.
 
 * No JNI (optional Panama downcall into `libhsn_hotpath` for batch AVX-512 / AVX2 tests; scalar fallback if the CPU or config forbids them)
 * No custom pathfinder replacement
-* No custom far-chunk meshes (Distant Horizons / Sodium terrain)
+* No custom far-chunk meshes (Distant Horizons probably does it better)
 * Does not replace Sodium, Lithium, FerriteCore, or Entity Culling
 
 ## Config
