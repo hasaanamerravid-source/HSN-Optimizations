@@ -1,0 +1,14 @@
+[package]
+name = "hsn_hotpath"
+version = "0.1.0"
+edition = "2021"
+description = "Optional batch distance tests. Not used on the per-entity Java path."
+license = "MIT"
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+lto = true
+codegen-units = 1
+opt-level = 3
