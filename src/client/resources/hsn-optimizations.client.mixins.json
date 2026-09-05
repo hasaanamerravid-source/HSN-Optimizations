@@ -1,0 +1,43 @@
+{
+	"required": true,
+	"package": "hsn.modod.client.mixin",
+	"plugin": "hsn.modod.client.mixin.HSNMixinPlugin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"ParticleManagerMixin",
+		"ParticleTickMixin",
+		"EntityRendererMixin",
+		"EntityShadowMixin",
+		"SoundEngineMixin",
+		"SoundInstanceAccess",
+		"ToastMixin",
+		"BlockEntityViewDistanceMixin",
+		"NameTagMixin",
+		"DebugScreenMixin",
+		"ItemSpinMixin",
+		"TextureAnimationMixin",
+		"TextureAtlasLodMixin",
+		"LevelRendererLodMixin",
+		"BeaconRendererMixin",
+		"FogRendererMixin",
+		"GlowOutlineMixin",
+		"BufferStorageMixin",
+		"RenderShapeMixin",
+		"SectionFrustumShapeMixin",
+		"SodiumCircularMixin",
+		"GameRendererCaptureMixin",
+		"MinecraftUnfocusedMixin",
+		"EntityInterpSkipMixin",
+		"DistantClientTickMixin",
+		"LivingAnimThrottleMixin",
+		"CloudLodMixin",
+		"WeatherLodMixin",
+		"SkyExtrasMixin",
+		"WorldBorderLodMixin",
+		"FireworkParticleCapMixin",
+		"ParticleEngineCapMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

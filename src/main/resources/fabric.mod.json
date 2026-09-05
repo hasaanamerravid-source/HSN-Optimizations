@@ -1,0 +1,52 @@
+{
+	"schemaVersion": 1,
+	"id": "hsn-optimizations",
+	"version": "${version}",
+	"name": "HSN-Optimizations",
+	"description": "HSN-Optimizations 3.8.7 R — client culling plus high-end CPU cuts (lightmap cache, interp skip, idle AI, weather/cloud LOD). Complements Sodium. Fabric 26.2.",
+	"authors": [
+		"HSN"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/hsn-optimizations",
+		"sources": "https://github.com/hasaanamerravid-source/HSN-Optimizations"
+	},
+	"license": "MIT",
+	"icon": "assets/hsn-optimizations/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"hsn.modod.HSNOptimizations"
+		],
+		"client": [
+			"hsn.modod.client.HSNOptimizationsClient"
+		],
+		"modmenu": [
+			"hsn.modod.client.config.HSNModMenuIntegration"
+		],
+		"sodium:config_api_user": [
+			"hsn.modod.client.compat.HSNSodiumConfigEntryPoint"
+		],
+		"sodium:config": [
+			"hsn.modod.client.compat.HSNSodiumConfigEntryPoint"
+		]
+	},
+	"mixins": [
+		"hsn-optimizations.mixins.json",
+		{
+			"config": "hsn-optimizations.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.2",
+		"java": ">=25",
+		"fabric-api": "*",
+		"yet_another_config_lib_v3": "*"
+	},
+	"suggests": {
+		"modmenu": "*",
+		"sodium": "*"
+	}
+}

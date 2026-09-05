@@ -4,7 +4,7 @@
 **Minecraft:** 26.2 (Fabric)  
 **License:** MIT
 
-See `ARCHITECTURE.md` for the Panama / native pipeline. Runtime FFI is C ABI only (ASM, C, C++, Rust, optional Go). 
+See `ARCHITECTURE.md` for the Panama / native pipeline. Runtime FFI is C ABI only (ASM, C, C++, Rust, optional Go). Other languages stay off the frame path.
 
 Client-side distance culling and a few cheap tick helpers for weak GPUs.  
 Meant to sit next to Sodium, not replace it.

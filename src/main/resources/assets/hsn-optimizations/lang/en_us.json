@@ -1,0 +1,6 @@
+{
+	"modmenu.nameTranslation.hsn-optimizations": "HSN Optimizations",
+	"modmenu.descriptionTranslation.hsn-optimizations": "Client-side distance culling and adaptive FPS helpers. Complements Sodium.",
+	"key.hsn-optimizations.killswitch": "HSN master kill switch",
+	"key.hsn-optimizations.settings": "Open HSN settings"
+}
