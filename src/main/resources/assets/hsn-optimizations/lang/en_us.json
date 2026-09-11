@@ -1,0 +1,8 @@
+{
+	"modmenu.nameTranslation.hsn-optimizations": "HSN Optimizations",
+	"modmenu.descriptionTranslation.hsn-optimizations": "Client-side distance culling, particle budgets, and a stutter-safe scheduler. Sits next to Sodium. Does not replace Sodium, Lithium, or Iris.",
+	"key.category.hsn-optimizations.keys": "HSN Optimizations",
+	"key.hsn-optimizations.killswitch": "Master kill switch",
+	"key.hsn-optimizations.settings": "Open HSN settings",
+	"key.hsn-optimizations.unbound": "Not bound"
+}

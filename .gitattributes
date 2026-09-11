@@ -1,0 +1,38 @@
+# Keep polyglot kernels visible on the GitHub Linguist chart.
+# These are first-party sources, not vendored blobs.
+
+*.S linguist-language=Assembly
+*.s linguist-language=Assembly
+*.asm linguist-language=Assembly
+*.rs linguist-language=Rust
+*.cpp linguist-language=C++
+*.cc linguist-language=C++
+*.hpp linguist-language=C++
+*.swift linguist-language=Swift
+*.hs linguist-language=Haskell
+*.odin linguist-language=Odin
+*.nim linguist-language=Nim
+*.d linguist-language=D
+*.f90 linguist-language=Fortran
+*.zig linguist-language=Zig
+*.go linguist-language=Go
+*.kt linguist-language=Kotlin
+*.scala linguist-language=Scala
+*.wat linguist-language=WebAssembly
+*.ispc linguist-language=ISPC
+*.cl linguist-language=OpenCL
+*.hsnl linguist-detectable=true
+native/hsnl/generated/** linguist-generated=true
+*.wasm linguist-vendored=true
+
+native/** linguist-vendored=false
+native/** linguist-generated=false
+rust/** linguist-vendored=false
+rust/** linguist-generated=false
+src/main/kotlin/** linguist-vendored=false
+src/main/scala/** linguist-vendored=false
+
+src/main/resources/natives/** linguist-vendored=true
+src/main/resources/natives/** linguist-detectable=false
+libs/** linguist-vendored=true
+gradle/** linguist-vendored=true

@@ -1,0 +1,49 @@
+# HSNL — HSN Kernel Language
+# A tiny data-parallel language for packed cull / distance / LOD work.
+# The compiler (hsnlc.py) lowers this file to C and AVX2 assembly.
+#
+# Grammar (one statement per line):
+#   kernel NAME (ARGS) { BODY }
+#   ARG  = in TYPE NAME | out TYPE NAME | imm TYPE NAME
+#   TYPE = f32 | f64 | u8 | i32
+#   BODY = foreach i in n: STMT
+#   STMT = NAME[i] = EXPR
+#          | if COND { STMT } else { STMT }
+#
+# foreach is mapped onto a SIMD lane. The compiler unrolls by 8 and
+# emits scalar C plus optional AVX2 .S.
+
+kernel cull_f32(in f32 dist, imm f32 limit, out u8 mask) {
+    foreach i in n:
+        mask[i] = dist[i] > limit
+}
+
+kernel cull_f64(in f64 dist, imm f64 limit, out u8 mask) {
+    foreach i in n:
+        mask[i] = dist[i] > limit
+}
+
+kernel dist_sq_f32(in f32 x, in f32 y, in f32 z, imm f32 ox, imm f32 oy, imm f32 oz, out f32 dist) {
+    foreach i in n:
+        dist[i] = (x[i] - ox) * (x[i] - ox) + (y[i] - oy) * (y[i] - oy) + (z[i] - oz) * (z[i] - oz)
+}
+
+kernel cull_xyz_f32(in f32 x, in f32 y, in f32 z, imm f32 ox, imm f32 oy, imm f32 oz, imm f32 limit, out u8 mask) {
+    foreach i in n:
+        mask[i] = (x[i] - ox) * (x[i] - ox) + (y[i] - oy) * (y[i] - oy) + (z[i] - oz) * (z[i] - oz) > limit
+}
+
+kernel keep_u8(in f32 score, imm f32 keep, out u8 mask) {
+    foreach i in n:
+        mask[i] = score[i] <= keep
+}
+
+kernel lod_band_f32(in f32 dist, imm f32 t0, imm f32 t1, imm f32 t2, out u8 band) {
+    foreach i in n:
+        band[i] = dist[i] <= t0 ? 0 : dist[i] <= t1 ? 1 : dist[i] <= t2 ? 2 : 3
+}
+
+kernel rsqrt_f32(in f32 x, out f32 y) {
+    foreach i in n:
+        y[i] = x[i] <= 0 ? 0 : 1.5 * rsqrt(x[i]) - 0.5 * x[i] * rsqrt(x[i]) * rsqrt(x[i]) * rsqrt(x[i])
+}

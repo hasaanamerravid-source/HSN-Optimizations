@@ -1,0 +1,128 @@
+plugins {
+	// Minecraft 26.1+ is unobfuscated. The legacy "fabric-loom" id is for
+	// remapped/obfuscated games and will misconfigure a 26.2 workspace.
+	id "net.fabricmc.fabric-loom" version "${loom_version}"
+	id "maven-publish"
+}
+
+base {
+	archivesName = project.archives_base_name
+}
+
+version = project.mod_version
+group = project.maven_group
+
+loom {
+	mods {
+		"hsn-optimizations" {
+			sourceSet sourceSets.main
+		}
+	}
+	runs {
+		client {
+			vmArgs "-XX:+UseZGC", "-XX:+AlwaysPreTouch"
+			ideConfigGenerated = true
+		}
+		server {
+			vmArgs "-XX:+UseZGC", "-XX:+AlwaysPreTouch"
+			ideConfigGenerated = true
+		}
+	}
+}
+
+sourceSets {
+	sodiumStubs {
+		java.srcDir "src/sodiumStubs/java"
+	}
+}
+
+repositories {
+	maven { url = "https://maven.fabricmc.net/" }
+	maven { url = "https://maven.isxander.dev/releases" }
+	maven { url = "https://maven.terraformersmc.com/" }
+	maven { url = "https://maven.shedaniel.me/" }
+	maven {
+		name = "CaffeineMC"
+		url = "https://maven.caffeinemc.net/releases"
+	}
+	mavenCentral()
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	// net.fabricmc.fabric-loom (no-remap) has no modImplementation / modCompileOnly / include.
+	implementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	implementation "dev.isxander:yet-another-config-lib:${project.yacl_version_fabric}"
+	implementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+	compileOnly "net.caffeinemc:sodium-fabric-api:${project.sodium_api_version}"
+	compileOnly sourceSets.sodiumStubs.output
+}
+
+afterEvaluate {
+	sourceSets.main.compileClasspath += sourceSets.sodiumStubs.output
+}
+
+// CurseForge: default jar is Java-only. Bundled ELF/WASM is what trips
+// their automated malware queue. Opt in with -PbundleNatives=true.
+def bundleNatives = project.findProperty("bundleNatives") == "true"
+
+processResources {
+	inputs.property "version", project.version
+	inputs.property "bundleNatives", bundleNatives
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
+	exclude "natives/**"
+}
+
+if (bundleNatives) {
+	processResources {
+		from("native/prebuilt") {
+			into "natives"
+			include "linux-x86_64/*.so"
+			include "wasm/*.wasm"
+		}
+	}
+}
+
+tasks.named("jar").configure {
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+	doLast {
+		def leaked = []
+		zipTree(archiveFile.get()).visit { f ->
+			if (f.name.endsWith(".so") || f.name.endsWith(".dll") || f.name.endsWith(".wasm") || f.name.endsWith(".exe")) {
+				leaked << f.relativePath
+			}
+		}
+		if (leaked && !bundleNatives) {
+			throw new GradleException("CurseForge jar contained natives: " + leaked)
+		}
+		logger.lifecycle(bundleNatives
+				? "Jar includes optional Linux natives."
+				: "Jar is Java-only (CurseForge-safe).")
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 25
+	it.options.encoding = "UTF-8"
+	it.options.compilerArgs.addAll(["--add-modules", "jdk.incubator.vector"])
+}
+
+java {
+	withSourcesJar()
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
+}
+
+tasks.register("runClientFabric") {
+	group = "application"
+	description = "Launch Minecraft 26.2 Fabric client"
+	dependsOn "runClient"
+}
+
+tasks.register("runServerFabric") {
+	group = "application"
+	dependsOn "runServer"
+}
