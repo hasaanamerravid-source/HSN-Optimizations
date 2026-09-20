@@ -1,0 +1,43 @@
+name: Build Mod
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK 25
+      uses: actions/setup-java@v4
+      with:
+        java-version: "25"
+        distribution: "oracle"
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Build Java-only jar
+      run: ./gradlew build --no-daemon --stacktrace
+
+    - name: Upload storefront jar
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: hsn-optimizations-fabric-26.3
+        path: build/libs/hsn-optimizations-*.jar
+
+    - name: Build optional Linux natives jar
+      run: ./gradlew clean build -PbundleNatives=true --no-daemon --stacktrace
+
+    - name: Upload natives test jar
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: hsn-optimizations-linux-natives
+        path: build/libs/hsn-optimizations-*.jar
