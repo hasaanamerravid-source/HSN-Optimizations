@@ -1,43 +1,48 @@
-name: Build Mod
+name: Build and Release
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    tags:
+      - 'v*'
 
 jobs:
   build:
+    name: Build Native Binaries & JAR
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout Source
+        uses: actions/checkout@v4
 
-    - name: Set up JDK 25
-      uses: actions/setup-java@v4
-      with:
-        java-version: "25"
-        distribution: "oracle"
+      - name: Setup Rust Toolchain
+        uses: actions/rust-lang/setup-rust@v1
+        with:
+          toolchain: stable
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
 
-    - name: Build Java-only jar
-      run: ./gradlew build --no-daemon --stacktrace
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
 
-    - name: Upload storefront jar
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: hsn-optimizations-fabric-26.3
-        path: build/libs/hsn-optimizations-*.jar
+      - name: Make Gradlew Executable
+        run: chmod +x gradlew
 
-    - name: Build optional Linux natives jar
-      run: ./gradlew clean build -PbundleNatives=true --no-daemon --stacktrace
+      - name: Build Rust Native Binary
+        run: |
+          if [ -d "rust" ]; then
+            cd rust && cargo build --release && cd ..
+          fi
 
-    - name: Upload natives test jar
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: hsn-optimizations-linux-natives
-        path: build/libs/hsn-optimizations-*.jar
+      - name: Build Mod JAR
+        run: ./gradlew build --no-daemon
+
+      - name: Create GitHub Release and Upload Binary
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/libs/*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
