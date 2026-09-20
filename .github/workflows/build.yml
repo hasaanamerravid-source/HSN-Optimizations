@@ -31,8 +31,12 @@ jobs:
 
       - name: Build Rust Native Binary
         run: |
-          if [ -d "rust" ]; then
+          if [ -f "rust/Cargo.toml" ]; then
             cd rust && cargo build --release && cd ..
+          elif [ -f "native/Cargo.toml" ]; then
+            cd native && cargo build --release && cd ..
+          elif [ -f "Cargo.toml" ]; then
+            cargo build --release
           fi
 
       - name: Build Mod JAR
