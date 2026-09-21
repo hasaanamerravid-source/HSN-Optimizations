@@ -1,7 +1,0 @@
-# HSN recommended JVM arguments (Java 25+)
-# Paste into your launcher → Installation → JVM arguments.
-# ZGC is selected at process start. A running game cannot change it.
-#
--XX:+UseZGC
--XX:+AlwaysPreTouch
--XX:SoftMaxHeapSize=4G
