@@ -27,14 +27,10 @@ and config fields. That is overlap of *idea*, not a copied file.
 `ResolutionControlCompat` only detects those mods and turns HSN scale off.
 It does not include their code.
 
-## Removed in 4.0 because it was theater or a storefront problem
+## Removed in 4.0 b
 
-- Novelty languages (Go / Fortran / Haskell / …)
+- languages (Go / Fortran / Haskell / …)
 - Prebuilt `.so` blobs
 - YACL + Cloth Config UI
-- Unused DX12 / OpenCL stubs
 
-## Settings
 
-The in-game menu is a vanilla `Screen` (`HSNConfigScreen`). No YACL. No Cloth.
-Mod Menu and a Sodium “Open HSN settings” button only open that screen.
